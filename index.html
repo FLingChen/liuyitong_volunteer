@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考志愿填报 - 刘怡彤</title>
+<style>
+/* ===== CSS Reset & Variables ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --chong-color:#DC2626;--chong-bg:#FEF2F2;--chong-border:#FECACA;--chong-tag:#E53E3E;
+  --wen-color:#D97706;--wen-bg:#FFFBEB;--wen-border:#FDE68A;--wen-tag:#DD6B20;
+  --bao-color:#059669;--bao-bg:#ECFDF5;--bao-border:#A7F3D0;--bao-tag:#38A169;
+  --primary:#3B82F6;--primary-dark:#2563EB;--gray-50:#F9FAFB;--gray-100:#F3F4F6;
+  --gray-200:#E5E7EB;--gray-300:#D1D5DB;--gray-400:#9CA3AF;--gray-500:#6B7280;
+  --gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;--gray-900:#111827;
+  --radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);
+  --max-width:800px;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#F1F5F9;color:var(--gray-800);line-height:1.6;-webkit-tap-highlight-color:transparent;
+}
+
+/* ===== Layout ===== */
+.app-container{max-width:var(--max-width);margin:0 auto;padding:12px 12px 100px}
+
+/* ===== Header ===== */
+.app-header{text-align:center;padding:16px 0 8px}
+.app-header h1{font-size:1.5rem;font-weight:700;color:var(--gray-900)}
+.app-header .subtitle{font-size:.85rem;color:var(--gray-500);margin-top:2px}
+
+/* ===== Personal Info Card ===== */
+.info-card{
+  background:#fff;border-radius:var(--radius);padding:16px 20px;
+  box-shadow:var(--shadow);margin-bottom:16px;display:flex;
+  align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  border-left:4px solid var(--primary);
+}
+.info-main{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.info-name{font-size:1.3rem;font-weight:700;color:var(--gray-900)}
+.info-detail{font-size:.9rem;color:var(--gray-600);white-space:nowrap}
+.info-detail span{font-weight:600;color:var(--gray-800)}
+.info-rank{font-size:.9rem;color:var(--gray-600)}
+.info-rank strong{color:var(--primary);font-size:1.1rem}
+.info-actions{display:flex;gap:8px}
+.btn{
+  display:inline-flex;align-items:center;gap:5px;padding:8px 14px;
+  border-radius:var(--radius-sm);font-size:.85rem;font-weight:500;
+  cursor:pointer;border:none;transition:all .15s;font-family:inherit;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-outline{background:#fff;color:var(--gray-700);border:1px solid var(--gray-300)}
+.btn-outline:hover{background:var(--gray-50)}
+.btn-sm{padding:4px 10px;font-size:.78rem}
+.btn-xs{padding:3px 8px;font-size:.72rem;border-radius:6px}
+.btn-danger{background:#FEE2E2;color:#DC2626;border:1px solid #FECACA}
+.btn-danger:hover{background:#FEE2E2}
+.btn-icon{width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+
+/* ===== Tabs ===== */
+.tabs{
+  display:flex;gap:4px;background:var(--gray-200);padding:4px;
+  border-radius:var(--radius);margin-bottom:16px;position:sticky;top:8px;z-index:10;
+  box-shadow:var(--shadow);
+}
+.tab{
+  flex:1;text-align:center;padding:10px 12px;border-radius:calc(var(--radius) - 4px);
+  font-size:.9rem;font-weight:500;cursor:pointer;border:none;background:transparent;
+  color:var(--gray-600);transition:all .2s;font-family:inherit;
+}
+.tab.active{background:#fff;color:var(--gray-900);font-weight:600;box-shadow:var(--shadow)}
+
+/* ===== Category Sections ===== */
+.category-section{margin-bottom:12px;border-radius:var(--radius);overflow:hidden}
+.category-header{
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
+  font-weight:600;font-size:.95rem
+}
+.category-header .count{font-size:.8rem;opacity:.8}
+.category-chong .category-header{background:var(--chong-tag);color:#fff}
+.category-wen .category-header{background:var(--wen-tag);color:#fff}
+.category-bao .category-header{background:var(--bao-tag);color:#fff}
+.category-body{padding:8px}
+.category-chong .category-body{background:var(--chong-bg);border:2px solid var(--chong-border);border-top:none;border-radius:0 0 var(--radius) var(--radius)}
+.category-wen .category-body{background:var(--wen-bg);border:2px solid var(--wen-border);border-top:none;border-radius:0 0 var(--radius) var(--radius)}
+.category-bao .category-body{background:var(--bao-bg);border:2px solid var(--bao-border);border-top:none;border-radius:0 0 var(--radius) var(--radius)}
+
+/* ===== School Cards ===== */
+.school-card{
+  background:#fff;border-radius:var(--radius-sm);padding:14px 16px;
+  margin-bottom:8px;box-shadow:var(--shadow);transition:box-shadow .2s;
+}
+.school-card:hover{box-shadow:var(--shadow-md)}
+.school-card:last-child{margin-bottom:0}
+.school-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.school-name{font-weight:700;font-size:1.05rem;color:var(--gray-900);display:flex;align-items:center;gap:8px}
+.school-name .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.school-actions{display:flex;gap:6px}
+.major-list{list-style:none}
+.major-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 10px;border-radius:6px;font-size:.88rem;flex-wrap:wrap;gap:6px;
+  border-bottom:1px solid var(--gray-100);
+}
+.major-item:last-child{border-bottom:none}
+.major-item:nth-child(even){background:var(--gray-50)}
+.major-name{font-weight:500;color:var(--gray-800);min-width:120px}
+.major-ranks{display:flex;gap:8px;flex-wrap:wrap;font-size:.8rem;color:var(--gray-500)}
+.major-ranks .year{font-weight:600;color:var(--gray-600)}
+.major-diff{
+  font-weight:600;font-size:.82rem;padding:2px 8px;border-radius:10px;
+  white-space:nowrap;
+}
+.diff-negative{background:#FEE2E2;color:#DC2626}
+.diff-zero{background:#FEF3C7;color:#92400E}
+.diff-positive{background:#D1FAE5;color:#059669}
+
+/* Empty state */
+.empty-state{text-align:center;padding:24px 16px;color:var(--gray-400)}
+.empty-state svg{width:48px;height:48px;margin-bottom:8px;opacity:.5}
+.empty-state p{font-size:.85rem;margin-top:4px}
+
+/* ===== FAB ===== */
+.fab{
+  position:fixed;bottom:24px;right:24px;width:56px;height:56px;
+  border-radius:50%;background:var(--primary);color:#fff;border:none;
+  font-size:28px;cursor:pointer;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;z-index:20;
+}
+.fab:hover{background:var(--primary-dark);transform:scale(1.05)}
+.fab:active{transform:scale(.95)}
+
+/* ===== Modal ===== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;
+  display:flex;align-items:flex-end;justify-content:center;
+  animation:fadeIn .2s;
+}
+.modal-overlay.center{align-items:center}
+.modal{
+  background:#fff;border-radius:var(--radius) var(--radius) 0 0;
+  width:100%;max-width:600px;max-height:90vh;overflow-y:auto;
+  padding:20px;animation:slideUp .25s;
+}
+@media(min-width:640px){
+  .modal{border-radius:var(--radius);margin:20px}
+  .modal-overlay{align-items:center}
+}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.modal-header h3{font-size:1.1rem;font-weight:700}
+.modal-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray-400);padding:4px;line-height:1}
+.modal-close:hover{color:var(--gray-600)}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:.85rem;font-weight:600;color:var(--gray-700);margin-bottom:5px}
+.form-input,.form-select{
+  width:100%;padding:10px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);
+  font-size:.9rem;font-family:inherit;transition:border-color .15s;background:#fff;
+}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%236B7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.form-row{display:flex;gap:10px}
+.form-row>*{flex:1}
+.major-entry{
+  background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);
+  padding:12px;margin-bottom:10px;position:relative;
+}
+.major-entry .major-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.major-entry .major-header span{font-weight:600;font-size:.82rem;color:var(--gray-500)}
+.major-entry .rank-inputs{display:flex;gap:8px;flex-wrap:wrap}
+.major-entry .rank-inputs .form-input{flex:1;min-width:80px;font-size:.82rem;padding:7px 8px}
+.btn-link{background:none;border:none;color:var(--primary);cursor:pointer;font-size:.85rem;font-family:inherit;padding:0}
+.btn-link:hover{text-decoration:underline}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-200)}
+.confirm-content{text-align:center;padding:16px 0}
+.confirm-content p{font-size:.95rem;color:var(--gray-700);margin-bottom:16px}
+
+/* ===== Toast ===== */
+.toast{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;
+  padding:12px 24px;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;
+  color:#fff;box-shadow:var(--shadow-lg);animation:toastIn .3s;pointer-events:none;
+}
+.toast-success{background:#059669}
+.toast-error{background:#DC2626}
+.toast-info{background:var(--primary)}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ===== Responsive ===== */
+@media(min-width:640px){
+  .app-container{padding:20px 20px 100px}
+  .app-header h1{font-size:1.8rem}
+  .info-card{padding:20px 24px}
+  .major-item{padding:8px 14px}
+}
+@media(min-width:1024px){
+  .app-container{padding:24px 0 100px}
+}
+@media(max-width:400px){
+  .info-main{flex-direction:column;align-items:flex-start;gap:4px}
+  .info-detail{font-size:.82rem}
+  .major-item{flex-direction:column;align-items:flex-start}
+  .form-row{flex-direction:column}
+  .major-entry .rank-inputs .form-input{min-width:60px;font-size:.78rem}
+}
+
+/* ===== Footer bar ===== */
+.footer-bar{
+  text-align:center;padding:8px;font-size:.75rem;color:var(--gray-400);
+  position:fixed;bottom:0;left:0;right:0;background:rgba(241,245,249,.9);
+  backdrop-filter:blur(4px);pointer-events:none;z-index:5;
+}
+
+/* ===== Sync indicator ===== */
+.sync-dot{
+  width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px;
+}
+.sync-dot.synced{background:#059669}
+.sync-dot.syncing{background:#F59E0B;animation:pulse 1s infinite}
+.sync-dot.local{background:#DC2626}
+.sync-dot.离线{background:#DC2626}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.offline-badge{
+  display:inline-flex;align-items:center;gap:4px;font-size:.7rem;
+  color:var(--gray-500);background:var(--gray-200);padding:2px 8px;border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <div class="app-header">
+    <h1>🎓 高考志愿填报</h1>
+    <p class="subtitle" id="syncStatus">
+      <span id="syncText">未配置云端</span>
+      <span class="sync-dot" id="syncDot"></span>
+    </p>
+  </div>
+
+  <!-- Personal Info Card -->
+  <div class="info-card" id="infoCard">
+    <div class="info-main">
+      <span class="info-name" id="dispName">刘怡彤</span>
+      <span class="info-detail">分数 <span id="dispScore">606</span></span>
+      <span class="info-detail">选科 <span id="dispSubjects">物化生</span></span>
+      <span class="info-rank">位次 <strong id="dispRank">27800</strong></span>
+    </div>
+    <div class="info-actions">
+      <button class="btn btn-outline btn-sm" onclick="exportData()" title="导出备份">📥</button>
+      <button class="btn btn-outline btn-sm" onclick="triggerImport()" title="导入数据">📤</button>
+      <button class="btn btn-outline btn-sm" onclick="showInfoModal()">✎ 编辑</button>
+    </div>
+  </div>
+
+  <!-- Batch Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-batch="国家专项" onclick="switchBatch('国家专项',this)">🎯 国家专项</button>
+    <button class="tab" data-batch="本科一批" onclick="switchBatch('本科一批',this)">📚 本科一批</button>
+  </div>
+
+  <!-- Content Area -->
+  <div id="contentArea"></div>
+</div>
+
+<!-- Floating Action Button -->
+<button class="fab" id="fabMain" onclick="addNewEntry()" title="添加志愿">+</button>
+
+<!-- Modal Container -->
+<div id="modalContainer"></div>
+
+<!-- Toast Container -->
+<div id="toastContainer"></div>
+
+<!-- Footer -->
+<div class="footer-bar" id="footerBar">⚠ 未配置云端 · 数据仅保存在本机</div>
+
+
+<script>
+/* =================================================================
+ * 高考志愿填报系统 - 主应用逻辑
+ * ================================================================= */
+
+// ====== SUPABASE CONFIG ======
+// 替换为你的 Supabase 配置（详见 README.md）
+const SUPABASE_CONFIG = {
+  url: "https://lcrbqjtvghoxkevfpgsm.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjcmJxanR2Z2hveGtldmZwZ3NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1NDU4MzUsImV4cCI6MjA5ODEyMTgzNX0.vRnxzeemSbTPRpJRrEAqxsrGjoCaXPv36pvC7YfPqlI"
+};
+
+// ====== APP STATE ======
+const DEFAULT_DATA = {
+  personalInfo: { name:'刘怡彤', score:606, subjects:'物化生', rank:27800 },
+  entries: {}
+};
+
+let state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+let currentBatch = '国家专项';
+let cloudConfigured = false;
+let cloudApiBase = null;
+let cloudApiKey = null;
+let lastCloudHash = '';
+let pollTimer = null;
+
+// ====== STORAGE LAYER (纯 fetch，无需外部 SDK) ======
+function cloudFetch(path, options) {
+  const headers = {
+    'apikey': cloudApiKey,
+    'Authorization': 'Bearer ' + cloudApiKey,
+    'Content-Type': 'application/json'
+  };
+  if (options && options.headers) Object.assign(headers, options.headers);
+  return fetch(cloudApiBase + path, { ...options, headers });
+}
+
+const Storage = {
+  init() {
+    const hasConfig = SUPABASE_CONFIG.url && SUPABASE_CONFIG.url.includes('supabase.co') && SUPABASE_CONFIG.anonKey && SUPABASE_CONFIG.anonKey.length > 20;
+    if (hasConfig) {
+      cloudApiBase = SUPABASE_CONFIG.url.replace(/\/+$/, '') + '/rest/v1';
+      cloudApiKey = SUPABASE_CONFIG.anonKey;
+      cloudConfigured = true;
+      updateSyncStatus('synced','已连接云端');
+      // 启动轮询（每 5 秒检查云端变化）
+      pollTimer = setInterval(() => Storage.poll(), 5000);
+      return true;
+    } else {
+      cloudConfigured = false;
+      updateSyncStatus('离线','未配置云端');
+      return false;
+    }
+  },
+
+  async poll() {
+    if (!cloudConfigured) return;
+    try {
+      const res = await cloudFetch('/app_state?id=eq.main&select=data');
+      if (!res.ok) return;
+      const rows = await res.json();
+      if (rows && rows.length > 0 && rows[0].data) {
+        const newHash = JSON.stringify(rows[0].data);
+        if (newHash !== lastCloudHash) {
+          lastCloudHash = newHash;
+          const cloudData = rows[0].data;
+          if (cloudData.personalInfo && cloudData.entries) {
+            state = cloudData;
+            render();
+          }
+        }
+      }
+    } catch(e) {
+      // 静默重试
+    }
+  },
+
+  async load() {
+    if (cloudConfigured) {
+      try {
+        updateSyncStatus('syncing','同步中...');
+        const res = await cloudFetch('/app_state?id=eq.main&select=data');
+        if (res.ok) {
+          const rows = await res.json();
+          if (rows && rows.length > 0 && rows[0].data) {
+            state = rows[0].data;
+            lastCloudHash = JSON.stringify(state);
+          } else {
+            // 表是空的，写入初始数据
+            await cloudFetch('/app_state', {
+              method: 'POST',
+              body: JSON.stringify({ id: 'main', data: DEFAULT_DATA }),
+              headers: { 'Prefer': 'resolution=merge-duplicates' }
+            });
+            state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            lastCloudHash = JSON.stringify(state);
+          }
+        } else {
+          const err = await res.text();
+          console.error('云端读取失败:', res.status, err);
+          toast('云端连接失败(' + res.status + ')，请检查配置', 'error');
+          cloudConfigured = false;
+          if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+          updateSyncStatus('离线','连接失败');
+        }
+        if (cloudConfigured) updateSyncStatus('synced','已连接云端');
+        return;
+      } catch(e) {
+        console.error('云端请求异常:', e.message);
+        toast('云端连接异常，请检查网络', 'error');
+        cloudConfigured = false;
+        if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        updateSyncStatus('离线','连接失败');
+      }
+    }
+    // 未配云端，用本地
+    updateSyncStatus('local','本地模式');
+    const raw = localStorage.getItem('gaokao_volunteer_data');
+    if (raw) {
+      try { const d = JSON.parse(raw); if (d && d.personalInfo && d.entries) { state = d; return; } } catch(e) {}
+    }
+    state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  },
+
+  async save() {
+    if (cloudConfigured) {
+      try {
+        updateSyncStatus('syncing','保存中...');
+        const body = JSON.stringify({ id: 'main', data: state, updated_at: new Date().toISOString() });
+        const res = await cloudFetch('/app_state?id=eq.main', {
+          method: 'PATCH',
+          body: body,
+          headers: { 'Prefer': 'return=minimal' }
+        });
+        if (!res.ok && res.status !== 204) {
+          const err = await res.text();
+          throw new Error(res.status + ' ' + err);
+        }
+        lastCloudHash = JSON.stringify(state);
+        updateSyncStatus('synced','已连接云端');
+      } catch(e) {
+        console.error('云端保存失败:', e.message);
+        toast('保存失败: ' + e.message, 'error');
+      }
+    } else {
+      localStorage.setItem('gaokao_volunteer_data', JSON.stringify(state));
+    }
+  }
+};
+
+function updateSyncStatus(status, text) {
+  const dot = document.getElementById('syncDot');
+  const txt = document.getElementById('syncText');
+  const footer = document.getElementById('footerBar');
+  if (dot) dot.className = 'sync-dot ' + status;
+  if (txt) txt.textContent = text;
+  if (footer) {
+    if (status === 'synced') footer.innerHTML = '☁ 云端同步中 · 所有人可编辑';
+    else if (status === 'syncing') footer.innerHTML = '⏳ 同步中...';
+    else if (status === 'local') footer.innerHTML = '⚠ 本地模式 · 未配置云端共享';
+    else footer.innerHTML = '⚠ 离线 · 数据仅保存在本机';
+  }
+}
+
+// ====== UTILITY FUNCTIONS ======
+function uuid() {
+  return 'e' + Date.now().toString(36) + Math.random().toString(36).substr(2,6);
+}
+
+function calcDiff(major) {
+  // 计算等效位差：平均位次 - 考生位次
+  const ranks = [major.rank2025, major.rank2024, major.rank2023].filter(r => r && r > 0);
+  if (ranks.length === 0) return null;
+  const avg = Math.round(ranks.reduce((a,b) => a + b, 0) / ranks.length);
+  return { avg, diff: avg - state.personalInfo.rank, years: ranks.length };
+}
+
+function formatDiff(diff) {
+  if (diff === null || diff === undefined) return '';
+  const sign = diff > 0 ? '+' : '';
+  return sign + diff.toLocaleString('zh-CN');
+}
+
+function getCategoryConfig(cat) {
+  switch(cat) {
+    case '冲': return { cls:'category-chong', color:getComputedStyle(document.documentElement).getPropertyValue('--chong-tag').trim()||'#E53E3E', emoji:'🔴' };
+    case '稳': return { cls:'category-wen', color:'#DD6B20', emoji:'🟡' };
+    case '保': return { cls:'category-bao', color:'#38A169', emoji:'🟢' };
+    default: return { cls:'', color:'#6B7280', emoji:'⚪' };
+  }
+}
+
+// ====== GROUPING LOGIC ======
+// Group entries by (batch, category, school)
+function getGroupedEntries(batch) {
+  const groups = {}; // key: "category|school" → { category, school, entries: [{id, entry}] }
+
+  Object.entries(state.entries).forEach(([id, entry]) => {
+    if (entry.batch !== batch) return;
+    const key = entry.category + '|' + entry.school;
+    if (!groups[key]) {
+      groups[key] = { category: entry.category, school: entry.school, items: [] };
+    }
+    groups[key].items.push({ id, entry });
+  });
+
+  // Group by category
+  const result = { '冲': [], '稳': [], '保': [] };
+  Object.values(groups).forEach(g => {
+    if (result[g.category]) {
+      result[g.category].push(g);
+    }
+  });
+
+  // Sort each category by school name
+  Object.keys(result).forEach(cat => {
+    result[cat].sort((a, b) => a.school.localeCompare(b.school, 'zh-CN'));
+  });
+
+  return result;
+}
+
+// ====== RENDER ======
+function render() {
+  renderContent();
+}
+
+function renderContent() {
+  const container = document.getElementById('contentArea');
+  const grouped = getGroupedEntries(currentBatch);
+  const categories = ['冲', '稳', '保'];
+
+  let html = '';
+
+  categories.forEach(cat => {
+    const groups = grouped[cat];
+    const cfg = getCategoryConfig(cat);
+    const schoolCount = groups.length;
+
+    // Count total majors
+    let majorCount = 0;
+    groups.forEach(g => { g.items.forEach(item => { majorCount += item.entry.majors.length; }); });
+
+    html += `<div class="category-section ${cfg.cls}">`;
+    html += `<div class="category-header">`;
+    html += `<span>${cfg.emoji} ${cat}</span>`;
+    html += `<span class="count">${schoolCount}所学校 · ${majorCount}个专业</span>`;
+    html += `</div>`;
+    html += `<div class="category-body">`;
+
+    if (groups.length === 0) {
+      html += `<div class="empty-state">
+        <p>暂无${cat}的志愿</p>
+        <p style="font-size:.75rem;margin-top:2px">点击右下角 + 按钮添加</p>
+      </div>`;
+    } else {
+      groups.forEach(group => {
+        html += renderSchoolGroup(group);
+      });
+    }
+
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderSchoolGroup(group) {
+  const cfg = getCategoryConfig(group.category);
+
+  // Merge all majors from all entries in this group
+  let allMajors = [];
+  let entryIds = [];
+  group.items.forEach(item => {
+    entryIds.push(item.id);
+    item.entry.majors.forEach((m, mi) => {
+      allMajors.push({ ...m, _entryId: item.id, _majorIndex: mi });
+    });
+  });
+
+  let majorsHtml = '';
+  allMajors.forEach(m => {
+    const diffResult = calcDiff(m);
+    const diffDisplay = diffResult ? formatDiff(diffResult.diff) : '--';
+    let diffClass = '';
+    if (diffResult) {
+      if (diffResult.diff < -2000) diffClass = 'diff-negative';
+      else if (Math.abs(diffResult.diff) <= 2000) diffClass = 'diff-zero';
+      else diffClass = 'diff-positive';
+    }
+
+    // Rank display
+    let rankParts = [];
+    [2025,2024,2023].forEach(y => {
+      const key = 'rank' + y;
+      if (m[key] && m[key] > 0) {
+        rankParts.push(`<span><span class="year">${y}:</span> ${m[key].toLocaleString('zh-CN')}</span>`);
+      }
+    });
+    const ranksDisplay = rankParts.length > 0 ? rankParts.join(' · ') : '<span style="color:#9CA3AF">未填位次</span>';
+
+    majorsHtml += `
+      <li class="major-item">
+        <span class="major-name">📖 ${escHtml(m.name)}</span>
+        <span class="major-ranks">${ranksDisplay}</span>
+        ${diffResult ? `<span class="major-diff ${diffClass}">等效位差 ${diffDisplay}</span>` : `<span class="major-diff" style="color:#9CA3AF">--</span>`}
+      </li>`;
+  });
+
+  return `
+    <div class="school-card">
+      <div class="school-header">
+        <span class="school-name">
+          <span class="dot" style="background:${cfg.color}"></span>
+          🏫 ${escHtml(group.school)}
+        </span>
+        <div class="school-actions">
+          <button class="btn btn-outline btn-xs" onclick="editSchoolGroup('${escAttr(group.school)}','${escAttr(group.category)}')" title="编辑此学校在本类别下的所有志愿">✎ 编辑</button>
+        </div>
+      </div>
+      <ul class="major-list">${majorsHtml}</ul>
+      ${entryIds.length > 1 ? `<div style="font-size:.7rem;color:#9CA3AF;margin-top:8px;text-align:right">${entryIds.length}个志愿条目已合并</div>` : ''}
+    </div>`;
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function escAttr(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');
+}
+
+// ====== BATCH SWITCHING ======
+function switchBatch(batch, el) {
+  currentBatch = batch;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  render();
+}
+
+// ====== PERSONAL INFO EDIT ======
+function showInfoModal() {
+  const pi = state.personalInfo;
+  const html = `
+    <div class="modal-overlay center" id="infoModalOverlay" onclick="if(event.target===this)closeModal('infoModalOverlay')">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>✎ 编辑个人信息</h3>
+          <button class="modal-close" onclick="closeModal('infoModalOverlay')">&times;</button>
+        </div>
+        <div class="form-group"><label class="form-label">姓名</label><input class="form-input" id="editName" value="${escAttr(pi.name)}"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">分数</label><input class="form-input" type="number" id="editScore" value="${pi.score}"></div>
+          <div class="form-group"><label class="form-label">位次</label><input class="form-input" type="number" id="editRank" value="${pi.rank}"></div>
+        </div>
+        <div class="form-group"><label class="form-label">选科</label><input class="form-input" id="editSubjects" value="${escAttr(pi.subjects)}" placeholder="如：物化生"></div>
+        <div class="form-actions">
+          <button class="btn btn-outline" onclick="closeModal('infoModalOverlay')">取消</button>
+          <button class="btn btn-primary" onclick="savePersonalInfo()">💾 保存</button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('modalContainer').innerHTML = html;
+}
+
+function savePersonalInfo() {
+  const name = document.getElementById('editName').value.trim();
+  const score = parseInt(document.getElementById('editScore').value) || 0;
+  const rank = parseInt(document.getElementById('editRank').value) || 0;
+  const subjects = document.getElementById('editSubjects').value.trim();
+
+  if (!name) { toast('请输入姓名','error'); return; }
+
+  state.personalInfo = { name, score, subjects, rank };
+  Storage.save().then(() => {
+    closeModal('infoModalOverlay');
+    render();
+    toast('个人信息已更新','success');
+  });
+}
+
+// ====== ENTRY EDITING ======
+function editSchoolGroup(school, category) {
+  // Find all entries matching (currentBatch, category, school)
+  const matching = [];
+  Object.entries(state.entries).forEach(([id, entry]) => {
+    if (entry.batch === currentBatch && entry.category === category && entry.school === school) {
+      matching.push({ id, entry });
+    }
+  });
+
+  if (matching.length === 0) return;
+
+  // Merge all majors for editing
+  showEntryModal(matching, category);
+}
+
+function showEntryModal(matchingEntries, defaultCategory) {
+  const isNew = matchingEntries.length === 0;
+  const firstEntry = isNew ? { batch: currentBatch, category: '冲', school: '', majors: [{ name: '', rank2025: null, rank2024: null, rank2023: null }] } : matchingEntries[0].entry;
+
+  let majors = [];
+  if (!isNew) {
+    matchingEntries.forEach(me => {
+      me.entry.majors.forEach(m => majors.push({...m}));
+    });
+  } else {
+    majors = [{ name: '', rank2025: null, rank2024: null, rank2023: null }];
+  }
+  if (majors.length === 0) majors = [{ name: '', rank2025: null, rank2024: null, rank2023: null }];
+
+  const entryIdsJson = escAttr(JSON.stringify(matchingEntries.map(m => m.id)));
+
+  const html = `
+    <div class="modal-overlay center" id="entryModalOverlay" onclick="if(event.target===this)closeModal('entryModalOverlay')">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>${isNew ? '＋ 添加志愿' : '✎ 编辑志愿'}</h3>
+          <button class="modal-close" onclick="closeModal('entryModalOverlay')">&times;</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">批次</label><select class="form-select" id="editBatch"><option value="国家专项" ${firstEntry.batch==='国家专项'?'selected':''}>国家专项</option><option value="本科一批" ${firstEntry.batch==='本科一批'?'selected':''}>本科一批</option></select></div>
+          <div class="form-group"><label class="form-label">冲/稳/保</label><select class="form-select" id="editCategory"><option value="冲" ${firstEntry.category==='冲'?'selected':''}>🔴 冲</option><option value="稳" ${firstEntry.category==='稳'?'selected':''}>🟡 稳</option><option value="保" ${firstEntry.category==='保'?'selected':''}>🟢 保</option></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">学校名称</label><input class="form-input" id="editSchool" value="${escAttr(firstEntry.school)}" placeholder="如：北京大学"></div>
+        <div class="form-group">
+          <label class="form-label">专业列表 <span style="font-weight:400;color:#9CA3AF">（位次可选填）</span></label>
+          <div id="majorsContainer"></div>
+          <button class="btn-link" onclick="addMajorRow()" style="margin-top:8px">＋ 添加专业</button>
+        </div>
+        ${!isNew ? `<div style="font-size:.75rem;color:#9CA3AF;margin-bottom:8px">📌 编辑将合并更新该学校在此类别下的所有志愿条目</div>` : ''}
+        <div class="form-actions">
+          ${!isNew ? `<button class="btn btn-danger btn-sm" onclick="deleteEntryGroup('${entryIdsJson}')" style="margin-right:auto">🗑 删除</button>` : ''}
+          <button class="btn btn-outline" onclick="closeModal('entryModalOverlay')">取消</button>
+          <button class="btn btn-primary" onclick="saveEntry('${entryIdsJson}',${isNew})">💾 保存</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('modalContainer').innerHTML = html;
+
+  // Render major rows
+  window._tempMajors = majors.map(m => ({...m}));
+  renderMajorRows();
+}
+
+function renderMajorRows() {
+  const container = document.getElementById('majorsContainer');
+  if (!container) return;
+  const majors = window._tempMajors || [];
+
+  let html = '';
+  majors.forEach((m, i) => {
+    html += `
+      <div class="major-entry">
+        <div class="major-header">
+          <span>专业 ${i + 1}</span>
+          ${majors.length > 1 ? `<button class="btn btn-danger btn-xs" onclick="removeMajorRow(${i})">✕ 删除</button>` : ''}
+        </div>
+        <input class="form-input" placeholder="专业名称（如：计算机科学与技术）" value="${escAttr(m.name||'')}" onchange="updateMajorField(${i},'name',this.value)" style="margin-bottom:6px">
+        <div class="rank-inputs">
+          <input class="form-input" placeholder="2025位次" type="number" value="${m.rank2025||''}" onchange="updateMajorField(${i},'rank2025',this.value?parseInt(this.value):null)">
+          <input class="form-input" placeholder="2024位次" type="number" value="${m.rank2024||''}" onchange="updateMajorField(${i},'rank2024',this.value?parseInt(this.value):null)">
+          <input class="form-input" placeholder="2023位次" type="number" value="${m.rank2023||''}" onchange="updateMajorField(${i},'rank2023',this.value?parseInt(this.value):null)">
+        </div>
+      </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function updateMajorField(index, field, value) {
+  if (!window._tempMajors) window._tempMajors = [];
+  if (!window._tempMajors[index]) window._tempMajors[index] = { name:'', rank2025:null, rank2024:null, rank2023:null };
+  window._tempMajors[index][field] = value;
+}
+
+function addMajorRow() {
+  if (!window._tempMajors) window._tempMajors = [];
+  window._tempMajors.push({ name:'', rank2025:null, rank2024:null, rank2023:null });
+  renderMajorRows();
+}
+
+function removeMajorRow(index) {
+  if (!window._tempMajors || window._tempMajors.length <= 1) {
+    toast('至少保留一个专业','info');
+    return;
+  }
+  window._tempMajors.splice(index, 1);
+  renderMajorRows();
+}
+
+async function saveEntry(entryIdsJson, isNew) {
+  const batch = document.getElementById('editBatch').value;
+  const category = document.getElementById('editCategory').value;
+  const school = document.getElementById('editSchool').value.trim();
+  const majors = (window._tempMajors || []).filter(m => m.name && m.name.trim());
+
+  if (!school) { toast('请输入学校名称','error'); return; }
+  if (majors.length === 0) { toast('请至少添加一个专业','error'); return; }
+
+  // Clean majors
+  const cleanMajors = majors.map(m => ({
+    name: m.name.trim(),
+    rank2025: m.rank2025 || null,
+    rank2024: m.rank2024 || null,
+    rank2023: m.rank2023 || null
+  }));
+
+  if (isNew) {
+    // Create new entry
+    const id = uuid();
+    state.entries[id] = {
+      batch, category, school,
+      majors: cleanMajors,
+      createdAt: Date.now()
+    };
+  } else {
+    // Update: consolidate into first matching entry, delete others
+    let ids;
+    try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
+    if (ids.length === 0) return;
+
+    // Update first entry
+    const firstId = ids[0];
+    if (state.entries[firstId]) {
+      state.entries[firstId].batch = batch;
+      state.entries[firstId].category = category;
+      state.entries[firstId].school = school;
+      state.entries[firstId].majors = cleanMajors;
+    }
+    // Delete extra entries
+    for (let i = 1; i < ids.length; i++) {
+      delete state.entries[ids[i]];
+    }
+  }
+
+  await Storage.save();
+  closeModal('entryModalOverlay');
+  window._tempMajors = null;
+  render();
+  toast(isNew ? '志愿已添加' : '志愿已更新', 'success');
+}
+
+async function deleteEntryGroup(entryIdsJson) {
+  let ids;
+  try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
+  if (ids.length === 0) return;
+
+  const schoolName = ids.length > 0 && state.entries[ids[0]] ? state.entries[ids[0]].school : '该学校';
+
+  // Show confirm
+  const html = `
+    <div class="modal-overlay center" id="confirmModalOverlay" onclick="if(event.target===this)closeModal('confirmModalOverlay')">
+      <div class="modal" style="max-width:400px">
+        <div class="confirm-content">
+          <p style="font-size:1.5rem">⚠️</p>
+          <p>确定要删除 <strong>${escHtml(schoolName)}</strong> 在此类别下的所有志愿吗？</p>
+          <p style="font-size:.8rem;color:#9CA3AF">将删除 ${ids.length} 个志愿条目，此操作不可恢复</p>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-outline" onclick="closeModal('confirmModalOverlay')">取消</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">确认删除</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('modalContainer').innerHTML = html;
+  document.getElementById('confirmDeleteBtn').onclick = async () => {
+    ids.forEach(id => delete state.entries[id]);
+    await Storage.save();
+    closeModal('confirmModalOverlay');
+    closeModal('entryModalOverlay');
+    render();
+    toast('志愿已删除', 'success');
+  };
+}
+
+// ====== NEW ENTRY (from FAB) ======
+function addNewEntry() {
+  showEntryModal([], '冲');
+}
+
+// ====== MODAL MANAGEMENT ======
+function closeModal(overlayId) {
+  const overlay = document.getElementById(overlayId);
+  if (overlay) overlay.remove();
+  // Also clear all modals if overlay not found
+  document.getElementById('modalContainer').innerHTML = '';
+}
+
+// ====== TOAST ======
+function toast(message, type='info') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast toast-' + type;
+  el.textContent = message;
+  container.appendChild(el);
+  setTimeout(() => { el.remove(); }, 2500);
+}
+
+// ====== EXPORT / IMPORT ======
+function exportData() {
+  const json = JSON.stringify(state, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '高考志愿备份_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('数据已导出', 'success');
+}
+
+function triggerImport() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      if (!data.personalInfo || !data.entries) {
+        toast('文件格式不正确', 'error');
+        return;
+      }
+      // Show confirm
+      const html = `
+        <div class="modal-overlay center" id="importModalOverlay" onclick="if(event.target===this)closeModal('importModalOverlay')">
+          <div class="modal" style="max-width:400px">
+            <div class="confirm-content">
+              <p style="font-size:1.5rem">⚠️</p>
+              <p>导入将<strong>覆盖</strong>当前所有数据</p>
+              <p style="font-size:.8rem;color:#9CA3AF">个人信息：${escHtml(data.personalInfo.name)} · ${data.personalInfo.score}分<br>志愿条目：${Object.keys(data.entries).length}个</p>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-outline" onclick="closeModal('importModalOverlay')">取消</button>
+              <button class="btn btn-primary" id="confirmImportBtn">确认导入</button>
+            </div>
+          </div>
+        </div>`;
+      document.getElementById('modalContainer').innerHTML = html;
+      document.getElementById('confirmImportBtn').onclick = async () => {
+        state = data;
+        await Storage.save();
+        closeModal('importModalOverlay');
+        render();
+        toast('数据已导入', 'success');
+      };
+    } catch(e) {
+      toast('文件解析失败：' + e.message, 'error');
+    }
+  };
+  input.click();
+}
+
+// ====== INITIALIZATION ======
+async function init() {
+  await Storage.init();
+  await Storage.load();
+
+  // Update personal info display
+  const pi = state.personalInfo;
+  document.getElementById('dispName').textContent = pi.name;
+  document.getElementById('dispScore').textContent = pi.score;
+  document.getElementById('dispSubjects').textContent = pi.subjects;
+  document.getElementById('dispRank').textContent = pi.rank.toLocaleString('zh-CN');
+
+  render();
+}
+
+// Also update info card display on render
+const origRender = render;
+render = function() {
+  const pi = state.personalInfo;
+  document.getElementById('dispName').textContent = pi.name;
+  document.getElementById('dispScore').textContent = pi.score;
+  document.getElementById('dispSubjects').textContent = pi.subjects;
+  document.getElementById('dispRank').textContent = pi.rank.toLocaleString('zh-CN');
+  origRender();
+};
+
+// Start app
+init().catch(e => {
+  console.error('初始化失败:', e);
+  toast('初始化失败，请刷新页面重试', 'error');
+});
+
+</script>
+
+</body>
+</html>

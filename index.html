@@ -23,16 +23,10 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
   background:#F1F5F9;color:var(--gray-800);line-height:1.6;-webkit-tap-highlight-color:transparent;
 }
-
-/* ===== Layout ===== */
 .app-container{max-width:var(--max-width);margin:0 auto;padding:12px 12px 100px}
-
-/* ===== Header ===== */
 .app-header{text-align:center;padding:16px 0 8px}
 .app-header h1{font-size:1.5rem;font-weight:700;color:var(--gray-900)}
 .app-header .subtitle{font-size:.85rem;color:var(--gray-500);margin-top:2px}
-
-/* ===== Personal Info Card ===== */
 .info-card{
   background:#fff;border-radius:var(--radius);padding:16px 20px;
   box-shadow:var(--shadow);margin-bottom:16px;display:flex;
@@ -49,8 +43,7 @@ body{
 .btn{
   display:inline-flex;align-items:center;gap:5px;padding:8px 14px;
   border-radius:var(--radius-sm);font-size:.85rem;font-weight:500;
-  cursor:pointer;border:none;transition:all .15s;font-family:inherit;
-  white-space:nowrap;
+  cursor:pointer;border:none;transition:all .15s;font-family:inherit;white-space:nowrap;
 }
 .btn-primary{background:var(--primary);color:#fff}
 .btn-primary:hover{background:var(--primary-dark)}
@@ -60,18 +53,20 @@ body{
 .btn-xs{padding:3px 8px;font-size:.72rem;border-radius:6px}
 .btn-danger{background:#FEE2E2;color:#DC2626;border:1px solid #FECACA}
 .btn-danger:hover{background:#FEE2E2}
+.btn-success{background:#D1FAE5;color:#059669;border:1px solid #A7F3D0}
+.btn-success:hover{background:#A7F3D0}
 .btn-icon{width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
 
-/* ===== Tabs ===== */
+/* ===== Tabs (scrollable for 4 items) ===== */
 .tabs{
   display:flex;gap:4px;background:var(--gray-200);padding:4px;
   border-radius:var(--radius);margin-bottom:16px;position:sticky;top:8px;z-index:10;
-  box-shadow:var(--shadow);
+  box-shadow:var(--shadow);overflow-x:auto;-webkit-overflow-scrolling:touch;
 }
 .tab{
-  flex:1;text-align:center;padding:10px 12px;border-radius:calc(var(--radius) - 4px);
-  font-size:.9rem;font-weight:500;cursor:pointer;border:none;background:transparent;
-  color:var(--gray-600);transition:all .2s;font-family:inherit;
+  flex:0 0 auto;text-align:center;padding:10px 14px;border-radius:calc(var(--radius) - 4px);
+  font-size:.85rem;font-weight:500;cursor:pointer;border:none;background:transparent;
+  color:var(--gray-600);transition:all .2s;font-family:inherit;white-space:nowrap;
 }
 .tab.active{background:#fff;color:var(--gray-900);font-weight:600;box-shadow:var(--shadow)}
 
@@ -100,7 +95,7 @@ body{
 .school-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
 .school-name{font-weight:700;font-size:1.05rem;color:var(--gray-900);display:flex;align-items:center;gap:8px}
 .school-name .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.school-actions{display:flex;gap:6px}
+.school-actions{display:flex;gap:6px;flex-wrap:wrap}
 .major-list{list-style:none}
 .major-item{
   display:flex;align-items:center;justify-content:space-between;
@@ -109,23 +104,68 @@ body{
 }
 .major-item:last-child{border-bottom:none}
 .major-item:nth-child(even){background:var(--gray-50)}
-.major-name{font-weight:500;color:var(--gray-800);min-width:120px}
+.major-name{font-weight:500;color:var(--gray-800);min-width:100px}
 .major-ranks{display:flex;gap:8px;flex-wrap:wrap;font-size:.8rem;color:var(--gray-500)}
 .major-ranks .year{font-weight:600;color:var(--gray-600)}
 .major-diff{
-  font-weight:600;font-size:.82rem;padding:2px 8px;border-radius:10px;
-  white-space:nowrap;
+  font-weight:600;font-size:.82rem;padding:2px 8px;border-radius:10px;white-space:nowrap;
 }
 .diff-negative{background:#FEE2E2;color:#DC2626}
 .diff-zero{background:#FEF3C7;color:#92400E}
 .diff-positive{background:#D1FAE5;color:#059669}
 
+/* ===== Notes ===== */
+.notes-text{
+  font-size:.8rem;color:var(--gray-500);margin-top:6px;padding:6px 10px;
+  background:var(--gray-50);border-radius:6px;font-style:italic;
+  display:flex;align-items:flex-start;gap:4px;
+}
+.notes-text::before{content:'💬';font-style:normal;flex-shrink:0}
+
+/* ===== Applications Section ===== */
+.apps-section{margin-bottom:16px}
+.apps-section-header{
+  display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;
+  font-weight:700;font-size:.95rem;color:var(--gray-800);
+}
+.apps-section-header .badge{font-size:.75rem;color:var(--gray-500);font-weight:400}
+
+.app-card{
+  background:#fff;border-radius:var(--radius-sm);padding:14px 16px;
+  margin-bottom:8px;box-shadow:var(--shadow);border-left:4px solid var(--primary);
+  transition:box-shadow .2s;
+}
+.app-card:hover{box-shadow:var(--shadow-md)}
+.app-card:last-child{margin-bottom:0}
+.app-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.app-card-order{font-weight:700;font-size:.9rem;color:var(--primary);white-space:nowrap}
+.app-card-school{font-weight:700;font-size:1.05rem;color:var(--gray-900)}
+.app-card .category-tag{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+.tag-chong{background:#FEE2E2;color:#DC2626}
+.tag-wen{background:#FEF3C7;color:#92400E}
+.tag-bao{background:#D1FAE5;color:#059669}
+.app-card .major-item .reorder-btns{display:flex;gap:2px;margin-left:4px}
+.reorder-btns button{
+  width:24px;height:24px;border:1px solid var(--gray-300);border-radius:4px;
+  background:#fff;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;
+  color:var(--gray-600);padding:0;
+}
+.reorder-btns button:hover{background:var(--gray-100);color:var(--gray-900)}
+.reorder-btns button:disabled{opacity:.3;cursor:default}
+.app-card-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--gray-100)}
+.app-divider{
+  border:none;border-top:2px dashed var(--gray-300);margin:16px 0 12px;
+}
+.app-empty{
+  text-align:center;padding:20px;color:var(--gray-400);font-size:.85rem;
+  background:var(--gray-50);border-radius:var(--radius-sm);border:2px dashed var(--gray-300);
+}
+
 /* Empty state */
 .empty-state{text-align:center;padding:24px 16px;color:var(--gray-400)}
-.empty-state svg{width:48px;height:48px;margin-bottom:8px;opacity:.5}
 .empty-state p{font-size:.85rem;margin-top:4px}
 
-/* ===== FAB ===== */
+/* FAB */
 .fab{
   position:fixed;bottom:24px;right:24px;width:56px;height:56px;
   border-radius:50%;background:var(--primary);color:#fff;border:none;
@@ -136,11 +176,10 @@ body{
 .fab:hover{background:var(--primary-dark);transform:scale(1.05)}
 .fab:active{transform:scale(.95)}
 
-/* ===== Modal ===== */
+/* Modal */
 .modal-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;
-  display:flex;align-items:flex-end;justify-content:center;
-  animation:fadeIn .2s;
+  display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s;
 }
 .modal-overlay.center{align-items:center}
 .modal{
@@ -158,17 +197,18 @@ body{
 .modal-close:hover{color:var(--gray-600)}
 .form-group{margin-bottom:14px}
 .form-label{display:block;font-size:.85rem;font-weight:600;color:var(--gray-700);margin-bottom:5px}
-.form-input,.form-select{
+.form-input,.form-select,.form-textarea{
   width:100%;padding:10px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);
   font-size:.9rem;font-family:inherit;transition:border-color .15s;background:#fff;
 }
-.form-input:focus,.form-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.form-textarea{resize:vertical;min-height:60px}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%236B7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .form-row{display:flex;gap:10px}
 .form-row>*{flex:1}
 .major-entry{
   background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);
-  padding:12px;margin-bottom:10px;position:relative;
+  padding:12px;margin-bottom:10px;
 }
 .major-entry .major-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .major-entry .major-header span{font-weight:600;font-size:.82rem;color:var(--gray-500)}
@@ -180,7 +220,7 @@ body{
 .confirm-content{text-align:center;padding:16px 0}
 .confirm-content p{font-size:.95rem;color:var(--gray-700);margin-bottom:16px}
 
-/* ===== Toast ===== */
+/* Toast */
 .toast{
   position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;
   padding:12px 24px;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;
@@ -190,17 +230,18 @@ body{
 .toast-error{background:#DC2626}
 .toast-info{background:var(--primary)}
 
-/* ===== Animations ===== */
+/* Animations */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media(min-width:640px){
   .app-container{padding:20px 20px 100px}
   .app-header h1{font-size:1.8rem}
   .info-card{padding:20px 24px}
   .major-item{padding:8px 14px}
+  .tab{font-size:.9rem;padding:10px 18px}
 }
 @media(min-width:1024px){
   .app-container{padding:24px 0 100px}
@@ -211,16 +252,18 @@ body{
   .major-item{flex-direction:column;align-items:flex-start}
   .form-row{flex-direction:column}
   .major-entry .rank-inputs .form-input{min-width:60px;font-size:.78rem}
+  .tab{font-size:.78rem;padding:8px 10px}
+  .app-card-school{font-size:.95rem}
 }
 
-/* ===== Footer bar ===== */
+/* Footer bar */
 .footer-bar{
   text-align:center;padding:8px;font-size:.75rem;color:var(--gray-400);
   position:fixed;bottom:0;left:0;right:0;background:rgba(241,245,249,.9);
   backdrop-filter:blur(4px);pointer-events:none;z-index:5;
 }
 
-/* ===== Sync indicator ===== */
+/* Sync indicator */
 .sync-dot{
   width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px;
 }
@@ -229,27 +272,17 @@ body{
 .sync-dot.local{background:#DC2626}
 .sync-dot.离线{background:#DC2626}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-.offline-badge{
-  display:inline-flex;align-items:center;gap:4px;font-size:.7rem;
-  color:var(--gray-500);background:var(--gray-200);padding:2px 8px;border-radius:10px;
-}
 </style>
 </head>
 <body>
 
 <div class="app-container">
-  <!-- Header -->
   <div class="app-header">
     <h1>🎓 高考志愿填报</h1>
-    <p class="subtitle" id="syncStatus">
-      <span id="syncText">未配置云端</span>
-      <span class="sync-dot" id="syncDot"></span>
-    </p>
+    <p class="subtitle"><span id="syncText">未配置云端</span><span class="sync-dot" id="syncDot"></span></p>
   </div>
 
-  <!-- Personal Info Card -->
-  <div class="info-card" id="infoCard">
+  <div class="info-card">
     <div class="info-main">
       <span class="info-name" id="dispName">刘怡彤</span>
       <span class="info-detail">分数 <span id="dispScore">606</span></span>
@@ -263,36 +296,28 @@ body{
     </div>
   </div>
 
-  <!-- Batch Tabs -->
-  <div class="tabs">
-    <button class="tab active" data-batch="国家专项" onclick="switchBatch('国家专项',this)">🎯 国家专项</button>
-    <button class="tab" data-batch="本科一批" onclick="switchBatch('本科一批',this)">📚 本科一批</button>
+  <!-- Batch Tabs (4, horizontally scrollable) -->
+  <div class="tabs" id="batchTabs">
+    <button class="tab active" data-batch="国家专项" onclick="switchBatch('国家专项',this)">国家专项</button>
+    <button class="tab" data-batch="本科一批" onclick="switchBatch('本科一批',this)">本科一批</button>
+    <button class="tab" data-batch="高校专项" onclick="switchBatch('高校专项',this)">高校专项</button>
+    <button class="tab" data-batch="地方专项" onclick="switchBatch('地方专项',this)">地方专项</button>
   </div>
 
-  <!-- Content Area -->
   <div id="contentArea"></div>
 </div>
 
-<!-- Floating Action Button -->
 <button class="fab" id="fabMain" onclick="addNewEntry()" title="添加志愿">+</button>
-
-<!-- Modal Container -->
 <div id="modalContainer"></div>
-
-<!-- Toast Container -->
 <div id="toastContainer"></div>
-
-<!-- Footer -->
 <div class="footer-bar" id="footerBar">⚠ 未配置云端 · 数据仅保存在本机</div>
-
 
 <script>
 /* =================================================================
- * 高考志愿填报系统 - 主应用逻辑
+ * 高考志愿填报系统 v2 - 主应用逻辑
  * ================================================================= */
 
 // ====== SUPABASE CONFIG ======
-// 替换为你的 Supabase 配置（详见 README.md）
 const SUPABASE_CONFIG = {
   url: "https://lcrbqjtvghoxkevfpgsm.supabase.co",
   anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjcmJxanR2Z2hveGtldmZwZ3NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1NDU4MzUsImV4cCI6MjA5ODEyMTgzNX0.vRnxzeemSbTPRpJRrEAqxsrGjoCaXPv36pvC7YfPqlI"
@@ -301,7 +326,8 @@ const SUPABASE_CONFIG = {
 // ====== APP STATE ======
 const DEFAULT_DATA = {
   personalInfo: { name:'刘怡彤', score:606, subjects:'物化生', rank:27800 },
-  entries: {}
+  entries: {},
+  applications: { '国家专项':[], '本科一批':[], '高校专项':[], '地方专项':[] }
 };
 
 let state = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -312,7 +338,7 @@ let cloudApiKey = null;
 let lastCloudHash = '';
 let pollTimer = null;
 
-// ====== STORAGE LAYER (纯 fetch，无需外部 SDK) ======
+// ====== STORAGE LAYER ======
 function cloudFetch(path, options) {
   const headers = {
     'apikey': cloudApiKey,
@@ -331,7 +357,6 @@ const Storage = {
       cloudApiKey = SUPABASE_CONFIG.anonKey;
       cloudConfigured = true;
       updateSyncStatus('synced','已连接云端');
-      // 启动轮询（每 5 秒检查云端变化）
       pollTimer = setInterval(() => Storage.poll(), 5000);
       return true;
     } else {
@@ -353,14 +378,14 @@ const Storage = {
           lastCloudHash = newHash;
           const cloudData = rows[0].data;
           if (cloudData.personalInfo && cloudData.entries) {
+            // 合并：确保新字段存在
+            if (!cloudData.applications) cloudData.applications = JSON.parse(JSON.stringify(DEFAULT_DATA.applications));
             state = cloudData;
             render();
           }
         }
       }
-    } catch(e) {
-      // 静默重试
-    }
+    } catch(e) {}
   },
 
   async load() {
@@ -371,10 +396,11 @@ const Storage = {
         if (res.ok) {
           const rows = await res.json();
           if (rows && rows.length > 0 && rows[0].data) {
-            state = rows[0].data;
+            const d = rows[0].data;
+            if (!d.applications) d.applications = JSON.parse(JSON.stringify(DEFAULT_DATA.applications));
+            state = d;
             lastCloudHash = JSON.stringify(state);
           } else {
-            // 表是空的，写入初始数据
             await cloudFetch('/app_state', {
               method: 'POST',
               body: JSON.stringify({ id: 'main', data: DEFAULT_DATA }),
@@ -384,9 +410,8 @@ const Storage = {
             lastCloudHash = JSON.stringify(state);
           }
         } else {
-          const err = await res.text();
-          console.error('云端读取失败:', res.status, err);
-          toast('云端连接失败(' + res.status + ')，请检查配置', 'error');
+          console.error('云端读取失败:', res.status);
+          toast('云端连接失败(' + res.status + ')', 'error');
           cloudConfigured = false;
           if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
           updateSyncStatus('离线','连接失败');
@@ -394,18 +419,21 @@ const Storage = {
         if (cloudConfigured) updateSyncStatus('synced','已连接云端');
         return;
       } catch(e) {
-        console.error('云端请求异常:', e.message);
+        console.error('云端异常:', e.message);
         toast('云端连接异常，请检查网络', 'error');
         cloudConfigured = false;
         if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
         updateSyncStatus('离线','连接失败');
       }
     }
-    // 未配云端，用本地
     updateSyncStatus('local','本地模式');
     const raw = localStorage.getItem('gaokao_volunteer_data');
     if (raw) {
-      try { const d = JSON.parse(raw); if (d && d.personalInfo && d.entries) { state = d; return; } } catch(e) {}
+      try {
+        const d = JSON.parse(raw);
+        if (!d.applications) d.applications = JSON.parse(JSON.stringify(DEFAULT_DATA.applications));
+        if (d && d.personalInfo && d.entries) { state = d; return; }
+      } catch(e) {}
     }
     state = JSON.parse(JSON.stringify(DEFAULT_DATA));
   },
@@ -416,14 +444,9 @@ const Storage = {
         updateSyncStatus('syncing','保存中...');
         const body = JSON.stringify({ id: 'main', data: state, updated_at: new Date().toISOString() });
         const res = await cloudFetch('/app_state?id=eq.main', {
-          method: 'PATCH',
-          body: body,
-          headers: { 'Prefer': 'return=minimal' }
+          method: 'PATCH', body: body, headers: { 'Prefer': 'return=minimal' }
         });
-        if (!res.ok && res.status !== 204) {
-          const err = await res.text();
-          throw new Error(res.status + ' ' + err);
-        }
+        if (!res.ok && res.status !== 204) throw new Error(res.status + ' ' + await res.text());
         lastCloudHash = JSON.stringify(state);
         updateSyncStatus('synced','已连接云端');
       } catch(e) {
@@ -456,7 +479,6 @@ function uuid() {
 }
 
 function calcDiff(major) {
-  // 计算等效位差：平均位次 - 考生位次
   const ranks = [major.rank2025, major.rank2024, major.rank2023].filter(r => r && r > 0);
   if (ranks.length === 0) return null;
   const avg = Math.round(ranks.reduce((a,b) => a + b, 0) / ranks.length);
@@ -465,89 +487,132 @@ function calcDiff(major) {
 
 function formatDiff(diff) {
   if (diff === null || diff === undefined) return '';
-  const sign = diff > 0 ? '+' : '';
-  return sign + diff.toLocaleString('zh-CN');
+  return (diff > 0 ? '+' : '') + diff.toLocaleString('zh-CN');
 }
 
 function getCategoryConfig(cat) {
   switch(cat) {
-    case '冲': return { cls:'category-chong', color:getComputedStyle(document.documentElement).getPropertyValue('--chong-tag').trim()||'#E53E3E', emoji:'🔴' };
-    case '稳': return { cls:'category-wen', color:'#DD6B20', emoji:'🟡' };
-    case '保': return { cls:'category-bao', color:'#38A169', emoji:'🟢' };
-    default: return { cls:'', color:'#6B7280', emoji:'⚪' };
+    case '冲': return { cls:'category-chong', color:'#E53E3E', emoji:'🔴', tagCls:'tag-chong' };
+    case '稳': return { cls:'category-wen', color:'#DD6B20', emoji:'🟡', tagCls:'tag-wen' };
+    case '保': return { cls:'category-bao', color:'#38A169', emoji:'🟢', tagCls:'tag-bao' };
+    default: return { cls:'', color:'#6B7280', emoji:'⚪', tagCls:'' };
   }
 }
 
-// ====== GROUPING LOGIC ======
-// Group entries by (batch, category, school)
 function getGroupedEntries(batch) {
-  const groups = {}; // key: "category|school" → { category, school, entries: [{id, entry}] }
-
+  const groups = {};
   Object.entries(state.entries).forEach(([id, entry]) => {
     if (entry.batch !== batch) return;
     const key = entry.category + '|' + entry.school;
-    if (!groups[key]) {
-      groups[key] = { category: entry.category, school: entry.school, items: [] };
-    }
+    if (!groups[key]) groups[key] = { category: entry.category, school: entry.school, items: [] };
     groups[key].items.push({ id, entry });
   });
-
-  // Group by category
   const result = { '冲': [], '稳': [], '保': [] };
   Object.values(groups).forEach(g => {
-    if (result[g.category]) {
-      result[g.category].push(g);
-    }
+    if (result[g.category]) result[g.category].push(g);
   });
-
-  // Sort each category by school name
   Object.keys(result).forEach(cat => {
     result[cat].sort((a, b) => a.school.localeCompare(b.school, 'zh-CN'));
   });
-
   return result;
 }
 
-// ====== RENDER ======
-function render() {
-  renderContent();
+function getApplications(batch) {
+  const apps = state.applications[batch] || [];
+  return [...apps].sort((a, b) => (a.order || 0) - (b.order || 0));
 }
+
+// ====== RENDER ======
+function render() { renderContent(); }
 
 function renderContent() {
   const container = document.getElementById('contentArea');
+  if (!container) return;
   const grouped = getGroupedEntries(currentBatch);
+  const apps = getApplications(currentBatch);
   const categories = ['冲', '稳', '保'];
-
   let html = '';
+
+  // ===== 报考志愿区域 =====
+  html += '<div class="apps-section">';
+  html += '<div class="apps-section-header">📋 报考志愿 <span class="badge">' + (apps.length > 0 ? apps.length + '个志愿' : '暂未填报') + '</span></div>';
+
+  if (apps.length === 0) {
+    html += '<div class="app-empty">📭 尚未选择报考志愿<br><span style="font-size:.75rem">在下方备选志愿中点击「＋加入报考」即可</span></div>';
+  } else {
+    apps.forEach((app, appIdx) => {
+      const cfg = getCategoryConfig(app.category);
+      const diffMap = {}; app.majors.forEach(m => { diffMap[m.name] = calcDiff(m); });
+
+      let majorHtml = '';
+      app.majors.forEach((m, mi) => {
+        const d = diffMap[m.name];
+        const diffDisp = d ? formatDiff(d.diff) : '--';
+        let diffCls = '';
+        if (d) {
+          if (d.diff < -2000) diffCls = 'diff-negative';
+          else if (Math.abs(d.diff) <= 2000) diffCls = 'diff-zero';
+          else diffCls = 'diff-positive';
+        }
+        let rankParts = [];
+        [2025,2024,2023].forEach(y => {
+          const key = 'rank' + y;
+          if (m[key] && m[key] > 0) rankParts.push('<span><span class="year">' + y + ':</span> ' + m[key].toLocaleString('zh-CN') + '</span>');
+        });
+        const ranksDisp = rankParts.length > 0 ? rankParts.join(' · ') : '<span style="color:#9CA3AF">未填</span>';
+
+        majorHtml += '<li class="major-item">' +
+          '<span class="major-name">📖 ' + escHtml(m.name) + '</span>' +
+          '<span class="major-ranks">' + ranksDisp + '</span>' +
+          (d ? '<span class="major-diff ' + diffCls + '">等效位差 ' + diffDisp + '</span>' : '<span class="major-diff" style="color:#9CA3AF">--</span>') +
+          '<span class="reorder-btns">' +
+            '<button onclick="moveMajorInApp(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\',' + mi + ',-1)" title="专业上移" ' + (mi===0?'disabled':'') + '>▲</button>' +
+            '<button onclick="moveMajorInApp(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\',' + mi + ',1)" title="专业下移" ' + (mi===app.majors.length-1?'disabled':'') + '>▼</button>' +
+          '</span></li>';
+      });
+
+      html += '<div class="app-card">' +
+        '<div class="app-card-header">' +
+          '<span class="app-card-order">第' + (appIdx + 1) + '志愿</span>' +
+          '<span class="app-card-school">🏫 ' + escHtml(app.school) + '</span>' +
+          '<span class="category-tag ' + cfg.tagCls + '">' + app.category + '</span>' +
+        '</div>' +
+        '<ul class="major-list">' + majorHtml + '</ul>' +
+        (app.notes ? '<div class="notes-text">' + escHtml(app.notes) + '</div>' : '') +
+        '<div class="app-card-actions">' +
+          '<button class="btn btn-outline btn-xs" onclick="moveAppUp(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\')" ' + (appIdx===0?'disabled':'') + '>⬆ 上移</button>' +
+          '<button class="btn btn-outline btn-xs" onclick="moveAppDown(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\')" ' + (appIdx===apps.length-1?'disabled':'') + '>⬇ 下移</button>' +
+          '<button class="btn btn-outline btn-xs" onclick="editAppNotes(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\')">✎ 备注</button>' +
+          '<button class="btn btn-danger btn-xs" onclick="removeFromApplications(\'' + escAttr(currentBatch) + '\',\'' + escAttr(app.id) + '\')">✕ 移除</button>' +
+        '</div></div>';
+    });
+  }
+  html += '</div>';
+
+  // 分割线
+  html += '<hr class="app-divider">';
+
+  // ===== 备选志愿区域 =====
+  html += '<div style="font-weight:700;font-size:.95rem;color:var(--gray-800);padding:4px 0 12px">🎯 备选志愿</div>';
 
   categories.forEach(cat => {
     const groups = grouped[cat];
     const cfg = getCategoryConfig(cat);
-    const schoolCount = groups.length;
-
-    // Count total majors
     let majorCount = 0;
     groups.forEach(g => { g.items.forEach(item => { majorCount += item.entry.majors.length; }); });
 
-    html += `<div class="category-section ${cfg.cls}">`;
-    html += `<div class="category-header">`;
-    html += `<span>${cfg.emoji} ${cat}</span>`;
-    html += `<span class="count">${schoolCount}所学校 · ${majorCount}个专业</span>`;
-    html += `</div>`;
-    html += `<div class="category-body">`;
+    html += '<div class="category-section ' + cfg.cls + '">';
+    html += '<div class="category-header"><span>' + cfg.emoji + ' ' + cat + '</span><span class="count">' + groups.length + '所 · ' + majorCount + '专业</span></div>';
+    html += '<div class="category-body">';
 
     if (groups.length === 0) {
-      html += `<div class="empty-state">
-        <p>暂无${cat}的志愿</p>
-        <p style="font-size:.75rem;margin-top:2px">点击右下角 + 按钮添加</p>
-      </div>`;
+      html += '<div class="empty-state"><p>暂无' + cat + '的志愿</p><p style="font-size:.75rem;margin-top:2px">点击右下角 + 添加</p></div>';
     } else {
       groups.forEach(group => {
         html += renderSchoolGroup(group);
       });
     }
-
-    html += `</div></div>`;
+    html += '</div></div>';
   });
 
   container.innerHTML = html;
@@ -555,16 +620,14 @@ function renderContent() {
 
 function renderSchoolGroup(group) {
   const cfg = getCategoryConfig(group.category);
-
-  // Merge all majors from all entries in this group
-  let allMajors = [];
-  let entryIds = [];
+  let allMajors = [], entryIds = [];
   group.items.forEach(item => {
     entryIds.push(item.id);
-    item.entry.majors.forEach((m, mi) => {
-      allMajors.push({ ...m, _entryId: item.id, _majorIndex: mi });
-    });
+    item.entry.majors.forEach((m, mi) => { allMajors.push({ ...m, _entryId: item.id, _majorIndex: mi }); });
   });
+  // 收集备注（取第一个有备注的）
+  let notesText = '';
+  group.items.forEach(item => { if (item.entry.notes && !notesText) notesText = item.entry.notes; });
 
   let majorsHtml = '';
   allMajors.forEach(m => {
@@ -576,46 +639,42 @@ function renderSchoolGroup(group) {
       else if (Math.abs(diffResult.diff) <= 2000) diffClass = 'diff-zero';
       else diffClass = 'diff-positive';
     }
-
-    // Rank display
     let rankParts = [];
     [2025,2024,2023].forEach(y => {
       const key = 'rank' + y;
-      if (m[key] && m[key] > 0) {
-        rankParts.push(`<span><span class="year">${y}:</span> ${m[key].toLocaleString('zh-CN')}</span>`);
-      }
+      if (m[key] && m[key] > 0) rankParts.push('<span><span class="year">' + y + ':</span> ' + m[key].toLocaleString('zh-CN') + '</span>');
     });
-    const ranksDisplay = rankParts.length > 0 ? rankParts.join(' · ') : '<span style="color:#9CA3AF">未填位次</span>';
+    const ranksDisplay = rankParts.length > 0 ? rankParts.join(' · ') : '<span style="color:#9CA3AF">未填</span>';
 
-    majorsHtml += `
-      <li class="major-item">
-        <span class="major-name">📖 ${escHtml(m.name)}</span>
-        <span class="major-ranks">${ranksDisplay}</span>
-        ${diffResult ? `<span class="major-diff ${diffClass}">等效位差 ${diffDisplay}</span>` : `<span class="major-diff" style="color:#9CA3AF">--</span>`}
-      </li>`;
+    majorsHtml += '<li class="major-item">' +
+      '<span class="major-name">📖 ' + escHtml(m.name) + '</span>' +
+      '<span class="major-ranks">' + ranksDisplay + '</span>' +
+      (diffResult ? '<span class="major-diff ' + diffClass + '">等效位差 ' + diffDisplay + '</span>' : '<span class="major-diff" style="color:#9CA3AF">--</span>') +
+      '</li>';
   });
 
-  return `
-    <div class="school-card">
-      <div class="school-header">
-        <span class="school-name">
-          <span class="dot" style="background:${cfg.color}"></span>
-          🏫 ${escHtml(group.school)}
-        </span>
-        <div class="school-actions">
-          <button class="btn btn-outline btn-xs" onclick="editSchoolGroup('${escAttr(group.school)}','${escAttr(group.category)}')" title="编辑此学校在本类别下的所有志愿">✎ 编辑</button>
-        </div>
-      </div>
-      <ul class="major-list">${majorsHtml}</ul>
-      ${entryIds.length > 1 ? `<div style="font-size:.7rem;color:#9CA3AF;margin-top:8px;text-align:right">${entryIds.length}个志愿条目已合并</div>` : ''}
-    </div>`;
+  // 检查该学校是否已在报考志愿中
+  const apps = state.applications[currentBatch] || [];
+  const alreadyInApp = apps.some(a => a.school === group.school);
+
+  return '<div class="school-card">' +
+    '<div class="school-header">' +
+      '<span class="school-name"><span class="dot" style="background:' + cfg.color + '"></span>🏫 ' + escHtml(group.school) + '</span>' +
+      '<div class="school-actions">' +
+        (alreadyInApp ? '<span style="font-size:.7rem;color:#38A169">✓ 已加入报考</span>' : '<button class="btn btn-success btn-xs" onclick="addToApplications(\'' + escAttr(currentBatch) + '\',\'' + escAttr(entryIds[0]) + '\')">＋加入报考</button>') +
+        '<button class="btn btn-outline btn-xs" onclick="editSchoolGroup(\'' + escAttr(group.school) + '\',\'' + escAttr(group.category) + '\')">✎ 编辑</button>' +
+      '</div>' +
+    '</div>' +
+    '<ul class="major-list">' + majorsHtml + '</ul>' +
+    (notesText ? '<div class="notes-text">' + escHtml(notesText) + '</div>' : '') +
+    (entryIds.length > 1 ? '<div style="font-size:.7rem;color:#9CA3AF;margin-top:8px;text-align:right">' + entryIds.length + '个条目已合并</div>' : '') +
+  '</div>';
 }
 
 function escHtml(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
 function escAttr(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');
@@ -624,7 +683,7 @@ function escAttr(str) {
 // ====== BATCH SWITCHING ======
 function switchBatch(batch, el) {
   currentBatch = batch;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#batchTabs .tab').forEach(t => t.classList.remove('active'));
   if (el) el.classList.add('active');
   render();
 }
@@ -632,25 +691,14 @@ function switchBatch(batch, el) {
 // ====== PERSONAL INFO EDIT ======
 function showInfoModal() {
   const pi = state.personalInfo;
-  const html = `
-    <div class="modal-overlay center" id="infoModalOverlay" onclick="if(event.target===this)closeModal('infoModalOverlay')">
-      <div class="modal">
-        <div class="modal-header">
-          <h3>✎ 编辑个人信息</h3>
-          <button class="modal-close" onclick="closeModal('infoModalOverlay')">&times;</button>
-        </div>
-        <div class="form-group"><label class="form-label">姓名</label><input class="form-input" id="editName" value="${escAttr(pi.name)}"></div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">分数</label><input class="form-input" type="number" id="editScore" value="${pi.score}"></div>
-          <div class="form-group"><label class="form-label">位次</label><input class="form-input" type="number" id="editRank" value="${pi.rank}"></div>
-        </div>
-        <div class="form-group"><label class="form-label">选科</label><input class="form-input" id="editSubjects" value="${escAttr(pi.subjects)}" placeholder="如：物化生"></div>
-        <div class="form-actions">
-          <button class="btn btn-outline" onclick="closeModal('infoModalOverlay')">取消</button>
-          <button class="btn btn-primary" onclick="savePersonalInfo()">💾 保存</button>
-        </div>
-      </div>
-    </div>`;
+  const html = '<div class="modal-overlay center" id="infoModalOverlay" onclick="if(event.target===this)closeModal(\'infoModalOverlay\')">' +
+    '<div class="modal"><div class="modal-header"><h3>✎ 编辑个人信息</h3><button class="modal-close" onclick="closeModal(\'infoModalOverlay\')">&times;</button></div>' +
+    '<div class="form-group"><label class="form-label">姓名</label><input class="form-input" id="editName" value="' + escAttr(pi.name) + '"></div>' +
+    '<div class="form-row"><div class="form-group"><label class="form-label">分数</label><input class="form-input" type="number" id="editScore" value="' + pi.score + '"></div>' +
+    '<div class="form-group"><label class="form-label">位次</label><input class="form-input" type="number" id="editRank" value="' + pi.rank + '"></div></div>' +
+    '<div class="form-group"><label class="form-label">选科</label><input class="form-input" id="editSubjects" value="' + escAttr(pi.subjects) + '" placeholder="如：物化生"></div>' +
+    '<div class="form-actions"><button class="btn btn-outline" onclick="closeModal(\'infoModalOverlay\')">取消</button>' +
+    '<button class="btn btn-primary" onclick="savePersonalInfo()">💾 保存</button></div></div></div>';
   document.getElementById('modalContainer').innerHTML = html;
 }
 
@@ -659,78 +707,63 @@ function savePersonalInfo() {
   const score = parseInt(document.getElementById('editScore').value) || 0;
   const rank = parseInt(document.getElementById('editRank').value) || 0;
   const subjects = document.getElementById('editSubjects').value.trim();
-
   if (!name) { toast('请输入姓名','error'); return; }
-
   state.personalInfo = { name, score, subjects, rank };
-  Storage.save().then(() => {
-    closeModal('infoModalOverlay');
-    render();
-    toast('个人信息已更新','success');
-  });
+  Storage.save().then(() => { closeModal('infoModalOverlay'); render(); toast('个人信息已更新','success'); });
 }
 
 // ====== ENTRY EDITING ======
 function editSchoolGroup(school, category) {
-  // Find all entries matching (currentBatch, category, school)
   const matching = [];
   Object.entries(state.entries).forEach(([id, entry]) => {
-    if (entry.batch === currentBatch && entry.category === category && entry.school === school) {
-      matching.push({ id, entry });
-    }
+    if (entry.batch === currentBatch && entry.category === category && entry.school === school) matching.push({ id, entry });
   });
-
   if (matching.length === 0) return;
-
-  // Merge all majors for editing
   showEntryModal(matching, category);
 }
 
 function showEntryModal(matchingEntries, defaultCategory) {
   const isNew = matchingEntries.length === 0;
-  const firstEntry = isNew ? { batch: currentBatch, category: '冲', school: '', majors: [{ name: '', rank2025: null, rank2024: null, rank2023: null }] } : matchingEntries[0].entry;
+  const firstEntry = isNew ? { batch: currentBatch, category: '冲', school: '', majors: [{ name: '', rank2025: null, rank2024: null, rank2023: null }], notes: '' } : matchingEntries[0].entry;
 
   let majors = [];
   if (!isNew) {
-    matchingEntries.forEach(me => {
-      me.entry.majors.forEach(m => majors.push({...m}));
-    });
+    matchingEntries.forEach(me => { me.entry.majors.forEach(m => majors.push({...m})); });
   } else {
     majors = [{ name: '', rank2025: null, rank2024: null, rank2023: null }];
   }
   if (majors.length === 0) majors = [{ name: '', rank2025: null, rank2024: null, rank2023: null }];
 
+  let notesText = '';
+  if (!isNew) {
+    matchingEntries.forEach(me => { if (me.entry.notes && !notesText) notesText = me.entry.notes; });
+  }
+
   const entryIdsJson = escAttr(JSON.stringify(matchingEntries.map(m => m.id)));
 
-  const html = `
-    <div class="modal-overlay center" id="entryModalOverlay" onclick="if(event.target===this)closeModal('entryModalOverlay')">
-      <div class="modal">
-        <div class="modal-header">
-          <h3>${isNew ? '＋ 添加志愿' : '✎ 编辑志愿'}</h3>
-          <button class="modal-close" onclick="closeModal('entryModalOverlay')">&times;</button>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">批次</label><select class="form-select" id="editBatch"><option value="国家专项" ${firstEntry.batch==='国家专项'?'selected':''}>国家专项</option><option value="本科一批" ${firstEntry.batch==='本科一批'?'selected':''}>本科一批</option></select></div>
-          <div class="form-group"><label class="form-label">冲/稳/保</label><select class="form-select" id="editCategory"><option value="冲" ${firstEntry.category==='冲'?'selected':''}>🔴 冲</option><option value="稳" ${firstEntry.category==='稳'?'selected':''}>🟡 稳</option><option value="保" ${firstEntry.category==='保'?'selected':''}>🟢 保</option></select></div>
-        </div>
-        <div class="form-group"><label class="form-label">学校名称</label><input class="form-input" id="editSchool" value="${escAttr(firstEntry.school)}" placeholder="如：北京大学"></div>
-        <div class="form-group">
-          <label class="form-label">专业列表 <span style="font-weight:400;color:#9CA3AF">（位次可选填）</span></label>
-          <div id="majorsContainer"></div>
-          <button class="btn-link" onclick="addMajorRow()" style="margin-top:8px">＋ 添加专业</button>
-        </div>
-        ${!isNew ? `<div style="font-size:.75rem;color:#9CA3AF;margin-bottom:8px">📌 编辑将合并更新该学校在此类别下的所有志愿条目</div>` : ''}
-        <div class="form-actions">
-          ${!isNew ? `<button class="btn btn-danger btn-sm" onclick="deleteEntryGroup('${entryIdsJson}')" style="margin-right:auto">🗑 删除</button>` : ''}
-          <button class="btn btn-outline" onclick="closeModal('entryModalOverlay')">取消</button>
-          <button class="btn btn-primary" onclick="saveEntry('${entryIdsJson}',${isNew})">💾 保存</button>
-        </div>
-      </div>
-    </div>`;
+  const html = '<div class="modal-overlay center" id="entryModalOverlay" onclick="if(event.target===this)closeModal(\'entryModalOverlay\')">' +
+    '<div class="modal"><div class="modal-header"><h3>' + (isNew ? '＋ 添加志愿' : '✎ 编辑志愿') + '</h3><button class="modal-close" onclick="closeModal(\'entryModalOverlay\')">&times;</button></div>' +
+    '<div class="form-row"><div class="form-group"><label class="form-label">批次</label><select class="form-select" id="editBatch">' +
+    '<option value="国家专项" ' + (firstEntry.batch==='国家专项'?'selected':'') + '>国家专项</option>' +
+    '<option value="本科一批" ' + (firstEntry.batch==='本科一批'?'selected':'') + '>本科一批</option>' +
+    '<option value="高校专项" ' + (firstEntry.batch==='高校专项'?'selected':'') + '>高校专项</option>' +
+    '<option value="地方专项" ' + (firstEntry.batch==='地方专项'?'selected':'') + '>地方专项</option>' +
+    '</select></div>' +
+    '<div class="form-group"><label class="form-label">冲/稳/保</label><select class="form-select" id="editCategory">' +
+    '<option value="冲" ' + (firstEntry.category==='冲'?'selected':'') + '>🔴 冲</option>' +
+    '<option value="稳" ' + (firstEntry.category==='稳'?'selected':'') + '>🟡 稳</option>' +
+    '<option value="保" ' + (firstEntry.category==='保'?'selected':'') + '>🟢 保</option></select></div></div>' +
+    '<div class="form-group"><label class="form-label">学校名称</label><input class="form-input" id="editSchool" value="' + escAttr(firstEntry.school) + '" placeholder="如：北京大学"></div>' +
+    '<div class="form-group"><label class="form-label">备注</label><textarea class="form-textarea" id="editNotes" placeholder="任意备注信息...">' + escHtml(notesText) + '</textarea></div>' +
+    '<div class="form-group"><label class="form-label">专业列表 <span style="font-weight:400;color:#9CA3AF">（位次可选填）</span></label><div id="majorsContainer"></div>' +
+    '<button class="btn-link" onclick="addMajorRow()" style="margin-top:8px">＋ 添加专业</button></div>' +
+    (!isNew ? '<div style="font-size:.75rem;color:#9CA3AF;margin-bottom:8px">📌 编辑将合并更新该学校在此类别下的所有志愿条目</div>' : '') +
+    '<div class="form-actions">' +
+    (!isNew ? '<button class="btn btn-danger btn-sm" onclick="deleteEntryGroup(\'' + entryIdsJson + '\')" style="margin-right:auto">🗑 删除</button>' : '') +
+    '<button class="btn btn-outline" onclick="closeModal(\'entryModalOverlay\')">取消</button>' +
+    '<button class="btn btn-primary" onclick="saveEntry(\'' + entryIdsJson + '\',' + isNew + ')">💾 保存</button></div></div></div>';
 
   document.getElementById('modalContainer').innerHTML = html;
-
-  // Render major rows
   window._tempMajors = majors.map(m => ({...m}));
   renderMajorRows();
 }
@@ -739,22 +772,16 @@ function renderMajorRows() {
   const container = document.getElementById('majorsContainer');
   if (!container) return;
   const majors = window._tempMajors || [];
-
   let html = '';
   majors.forEach((m, i) => {
-    html += `
-      <div class="major-entry">
-        <div class="major-header">
-          <span>专业 ${i + 1}</span>
-          ${majors.length > 1 ? `<button class="btn btn-danger btn-xs" onclick="removeMajorRow(${i})">✕ 删除</button>` : ''}
-        </div>
-        <input class="form-input" placeholder="专业名称（如：计算机科学与技术）" value="${escAttr(m.name||'')}" onchange="updateMajorField(${i},'name',this.value)" style="margin-bottom:6px">
-        <div class="rank-inputs">
-          <input class="form-input" placeholder="2025位次" type="number" value="${m.rank2025||''}" onchange="updateMajorField(${i},'rank2025',this.value?parseInt(this.value):null)">
-          <input class="form-input" placeholder="2024位次" type="number" value="${m.rank2024||''}" onchange="updateMajorField(${i},'rank2024',this.value?parseInt(this.value):null)">
-          <input class="form-input" placeholder="2023位次" type="number" value="${m.rank2023||''}" onchange="updateMajorField(${i},'rank2023',this.value?parseInt(this.value):null)">
-        </div>
-      </div>`;
+    html += '<div class="major-entry"><div class="major-header"><span>专业 ' + (i + 1) + '</span>' +
+      (majors.length > 1 ? '<button class="btn btn-danger btn-xs" onclick="removeMajorRow(' + i + ')">✕ 删除</button>' : '') +
+      '</div><input class="form-input" placeholder="专业名称" value="' + escAttr(m.name||'') + '" onchange="updateMajorField(' + i + ',\'name\',this.value)" style="margin-bottom:6px">' +
+      '<div class="rank-inputs">' +
+      '<input class="form-input" placeholder="2025位次" type="number" value="' + (m.rank2025||'') + '" onchange="updateMajorField(' + i + ',\'rank2025\',this.value?parseInt(this.value):null)">' +
+      '<input class="form-input" placeholder="2024位次" type="number" value="' + (m.rank2024||'') + '" onchange="updateMajorField(' + i + ',\'rank2024\',this.value?parseInt(this.value):null)">' +
+      '<input class="form-input" placeholder="2023位次" type="number" value="' + (m.rank2023||'') + '" onchange="updateMajorField(' + i + ',\'rank2023\',this.value?parseInt(this.value):null)">' +
+      '</div></div>';
   });
   container.innerHTML = html;
 }
@@ -772,10 +799,7 @@ function addMajorRow() {
 }
 
 function removeMajorRow(index) {
-  if (!window._tempMajors || window._tempMajors.length <= 1) {
-    toast('至少保留一个专业','info');
-    return;
-  }
+  if (!window._tempMajors || window._tempMajors.length <= 1) { toast('至少保留一个专业','info'); return; }
   window._tempMajors.splice(index, 1);
   renderMajorRows();
 }
@@ -784,45 +808,28 @@ async function saveEntry(entryIdsJson, isNew) {
   const batch = document.getElementById('editBatch').value;
   const category = document.getElementById('editCategory').value;
   const school = document.getElementById('editSchool').value.trim();
+  const notes = document.getElementById('editNotes').value.trim();
   const majors = (window._tempMajors || []).filter(m => m.name && m.name.trim());
-
   if (!school) { toast('请输入学校名称','error'); return; }
   if (majors.length === 0) { toast('请至少添加一个专业','error'); return; }
 
-  // Clean majors
-  const cleanMajors = majors.map(m => ({
-    name: m.name.trim(),
-    rank2025: m.rank2025 || null,
-    rank2024: m.rank2024 || null,
-    rank2023: m.rank2023 || null
-  }));
+  const cleanMajors = majors.map(m => ({ name: m.name.trim(), rank2025: m.rank2025 || null, rank2024: m.rank2024 || null, rank2023: m.rank2023 || null }));
 
   if (isNew) {
-    // Create new entry
     const id = uuid();
-    state.entries[id] = {
-      batch, category, school,
-      majors: cleanMajors,
-      createdAt: Date.now()
-    };
+    state.entries[id] = { batch, category, school, majors: cleanMajors, notes, createdAt: Date.now() };
   } else {
-    // Update: consolidate into first matching entry, delete others
-    let ids;
-    try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
+    let ids; try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
     if (ids.length === 0) return;
-
-    // Update first entry
     const firstId = ids[0];
     if (state.entries[firstId]) {
       state.entries[firstId].batch = batch;
       state.entries[firstId].category = category;
       state.entries[firstId].school = school;
       state.entries[firstId].majors = cleanMajors;
+      state.entries[firstId].notes = notes;
     }
-    // Delete extra entries
-    for (let i = 1; i < ids.length; i++) {
-      delete state.entries[ids[i]];
-    }
+    for (let i = 1; i < ids.length; i++) delete state.entries[ids[i]];
   }
 
   await Storage.save();
@@ -833,49 +840,133 @@ async function saveEntry(entryIdsJson, isNew) {
 }
 
 async function deleteEntryGroup(entryIdsJson) {
-  let ids;
-  try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
+  let ids; try { ids = JSON.parse(entryIdsJson); } catch(e) { ids = []; }
   if (ids.length === 0) return;
-
   const schoolName = ids.length > 0 && state.entries[ids[0]] ? state.entries[ids[0]].school : '该学校';
-
-  // Show confirm
-  const html = `
-    <div class="modal-overlay center" id="confirmModalOverlay" onclick="if(event.target===this)closeModal('confirmModalOverlay')">
-      <div class="modal" style="max-width:400px">
-        <div class="confirm-content">
-          <p style="font-size:1.5rem">⚠️</p>
-          <p>确定要删除 <strong>${escHtml(schoolName)}</strong> 在此类别下的所有志愿吗？</p>
-          <p style="font-size:.8rem;color:#9CA3AF">将删除 ${ids.length} 个志愿条目，此操作不可恢复</p>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-outline" onclick="closeModal('confirmModalOverlay')">取消</button>
-          <button class="btn btn-danger" id="confirmDeleteBtn">确认删除</button>
-        </div>
-      </div>
-    </div>`;
-
+  const html = '<div class="modal-overlay center" id="confirmModalOverlay" onclick="if(event.target===this)closeModal(\'confirmModalOverlay\')">' +
+    '<div class="modal" style="max-width:400px"><div class="confirm-content"><p style="font-size:1.5rem">⚠️</p>' +
+    '<p>确定要删除 <strong>' + escHtml(schoolName) + '</strong> 在此类别下的所有志愿吗？</p>' +
+    '<p style="font-size:.8rem;color:#9CA3AF">将删除 ' + ids.length + ' 个志愿条目，此操作不可恢复</p></div>' +
+    '<div class="form-actions"><button class="btn btn-outline" onclick="closeModal(\'confirmModalOverlay\')">取消</button>' +
+    '<button class="btn btn-danger" id="confirmDeleteBtn">确认删除</button></div></div></div>';
   document.getElementById('modalContainer').innerHTML = html;
   document.getElementById('confirmDeleteBtn').onclick = async () => {
     ids.forEach(id => delete state.entries[id]);
+    // 同时从报考志愿中移除
+    Object.keys(state.applications).forEach(b => {
+      state.applications[b] = state.applications[b].filter(a => !ids.includes(a.sourceEntryId));
+    });
     await Storage.save();
-    closeModal('confirmModalOverlay');
-    closeModal('entryModalOverlay');
-    render();
-    toast('志愿已删除', 'success');
+    closeModal('confirmModalOverlay'); closeModal('entryModalOverlay');
+    render(); toast('志愿已删除', 'success');
   };
 }
 
-// ====== NEW ENTRY (from FAB) ======
-function addNewEntry() {
-  showEntryModal([], '冲');
+// ====== APPLICATION MANAGEMENT ======
+async function addToApplications(batch, entryId) {
+  const entry = state.entries[entryId];
+  if (!entry) { toast('条目不存在', 'error'); return; }
+  const apps = state.applications[batch] || [];
+  // 检查是否已存在
+  if (apps.some(a => a.school === entry.school)) {
+    toast(entry.school + ' 已在报考志愿中', 'info'); return;
+  }
+  const newApp = {
+    id: uuid(),
+    school: entry.school,
+    category: entry.category,
+    majors: JSON.parse(JSON.stringify(entry.majors)),
+    notes: '',
+    order: apps.length,
+    sourceEntryId: entryId
+  };
+  if (!state.applications[batch]) state.applications[batch] = [];
+  state.applications[batch].push(newApp);
+  await Storage.save();
+  render();
+  toast('已加入报考志愿：' + entry.school, 'success');
 }
+
+async function removeFromApplications(batch, appId) {
+  if (!state.applications[batch]) return;
+  const app = state.applications[batch].find(a => a.id === appId);
+  state.applications[batch] = state.applications[batch].filter(a => a.id !== appId);
+  // 重新排序
+  state.applications[batch].forEach((a, i) => { a.order = i; });
+  await Storage.save();
+  render();
+  toast((app ? app.school : '志愿') + ' 已从报考中移除（备选池仍保留）', 'success');
+}
+
+async function moveAppUp(batch, appId) {
+  const apps = state.applications[batch];
+  if (!apps) return;
+  const idx = apps.findIndex(a => a.id === appId);
+  if (idx <= 0) return;
+  [apps[idx-1], apps[idx]] = [apps[idx], apps[idx-1]];
+  apps.forEach((a, i) => { a.order = i; });
+  await Storage.save();
+  render();
+}
+
+async function moveAppDown(batch, appId) {
+  const apps = state.applications[batch];
+  if (!apps) return;
+  const idx = apps.findIndex(a => a.id === appId);
+  if (idx < 0 || idx >= apps.length - 1) return;
+  [apps[idx+1], apps[idx]] = [apps[idx], apps[idx+1]];
+  apps.forEach((a, i) => { a.order = i; });
+  await Storage.save();
+  render();
+}
+
+async function moveMajorInApp(batch, appId, majorIdx, direction) {
+  const apps = state.applications[batch];
+  if (!apps) return;
+  const app = apps.find(a => a.id === appId);
+  if (!app) return;
+  const newIdx = majorIdx + direction;
+  if (newIdx < 0 || newIdx >= app.majors.length) return;
+  [app.majors[majorIdx], app.majors[newIdx]] = [app.majors[newIdx], app.majors[majorIdx]];
+  await Storage.save();
+  render();
+}
+
+function editAppNotes(batch, appId) {
+  const apps = state.applications[batch];
+  if (!apps) return;
+  const app = apps.find(a => a.id === appId);
+  if (!app) return;
+  const html = '<div class="modal-overlay center" id="appNotesOverlay" onclick="if(event.target===this)closeModal(\'appNotesOverlay\')">' +
+    '<div class="modal" style="max-width:420px"><div class="modal-header"><h3>✎ 报考备注 - ' + escHtml(app.school) + '</h3>' +
+    '<button class="modal-close" onclick="closeModal(\'appNotesOverlay\')">&times;</button></div>' +
+    '<div class="form-group"><label class="form-label">备注内容</label>' +
+    '<textarea class="form-textarea" id="editAppNotes" placeholder="报考相关备注...">' + escHtml(app.notes || '') + '</textarea></div>' +
+    '<div class="form-actions"><button class="btn btn-outline" onclick="closeModal(\'appNotesOverlay\')">取消</button>' +
+    '<button class="btn btn-primary" onclick="saveAppNotes(\'' + escAttr(batch) + '\',\'' + escAttr(appId) + '\')">💾 保存</button></div></div></div>';
+  document.getElementById('modalContainer').innerHTML = html;
+}
+
+async function saveAppNotes(batch, appId) {
+  const notes = document.getElementById('editAppNotes').value.trim();
+  const apps = state.applications[batch];
+  if (!apps) return;
+  const app = apps.find(a => a.id === appId);
+  if (!app) return;
+  app.notes = notes;
+  await Storage.save();
+  closeModal('appNotesOverlay');
+  render();
+  toast('备注已保存', 'success');
+}
+
+// ====== NEW ENTRY ======
+function addNewEntry() { showEntryModal([], '冲'); }
 
 // ====== MODAL MANAGEMENT ======
 function closeModal(overlayId) {
   const overlay = document.getElementById(overlayId);
   if (overlay) overlay.remove();
-  // Also clear all modals if overlay not found
   document.getElementById('modalContainer').innerHTML = '';
 }
 
@@ -895,73 +986,42 @@ function exportData() {
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = '高考志愿备份_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = '高考志愿备份_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click(); URL.revokeObjectURL(url);
   toast('数据已导出', 'success');
 }
 
 function triggerImport() {
   const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
+  input.type = 'file'; input.accept = '.json';
   input.onchange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const file = e.target.files[0]; if (!file) return;
     try {
-      const text = await file.text();
-      const data = JSON.parse(text);
-      if (!data.personalInfo || !data.entries) {
-        toast('文件格式不正确', 'error');
-        return;
-      }
-      // Show confirm
-      const html = `
-        <div class="modal-overlay center" id="importModalOverlay" onclick="if(event.target===this)closeModal('importModalOverlay')">
-          <div class="modal" style="max-width:400px">
-            <div class="confirm-content">
-              <p style="font-size:1.5rem">⚠️</p>
-              <p>导入将<strong>覆盖</strong>当前所有数据</p>
-              <p style="font-size:.8rem;color:#9CA3AF">个人信息：${escHtml(data.personalInfo.name)} · ${data.personalInfo.score}分<br>志愿条目：${Object.keys(data.entries).length}个</p>
-            </div>
-            <div class="form-actions">
-              <button class="btn btn-outline" onclick="closeModal('importModalOverlay')">取消</button>
-              <button class="btn btn-primary" id="confirmImportBtn">确认导入</button>
-            </div>
-          </div>
-        </div>`;
+      const text = await file.text(); const data = JSON.parse(text);
+      if (!data.personalInfo || !data.entries) { toast('文件格式不正确', 'error'); return; }
+      if (!data.applications) data.applications = JSON.parse(JSON.stringify(DEFAULT_DATA.applications));
+      const html = '<div class="modal-overlay center" id="importModalOverlay" onclick="if(event.target===this)closeModal(\'importModalOverlay\')">' +
+        '<div class="modal" style="max-width:400px"><div class="confirm-content"><p style="font-size:1.5rem">⚠️</p>' +
+        '<p>导入将<strong>覆盖</strong>当前所有数据</p>' +
+        '<p style="font-size:.8rem;color:#9CA3AF">个人信息：' + escHtml(data.personalInfo.name) + ' · ' + data.personalInfo.score + '分<br>志愿条目：' + Object.keys(data.entries).length + '个<br>报考志愿：' + Object.values(data.applications||{}).reduce((s,a)=>s+a.length,0) + '个</p></div>' +
+        '<div class="form-actions"><button class="btn btn-outline" onclick="closeModal(\'importModalOverlay\')">取消</button>' +
+        '<button class="btn btn-primary" id="confirmImportBtn">确认导入</button></div></div></div>';
       document.getElementById('modalContainer').innerHTML = html;
       document.getElementById('confirmImportBtn').onclick = async () => {
-        state = data;
-        await Storage.save();
-        closeModal('importModalOverlay');
-        render();
-        toast('数据已导入', 'success');
+        state = data; await Storage.save(); closeModal('importModalOverlay'); render(); toast('数据已导入', 'success');
       };
-    } catch(e) {
-      toast('文件解析失败：' + e.message, 'error');
-    }
+    } catch(e) { toast('文件解析失败：' + e.message, 'error'); }
   };
   input.click();
 }
 
 // ====== INITIALIZATION ======
 async function init() {
-  await Storage.init();
+  Storage.init();
   await Storage.load();
-
-  // Update personal info display
-  const pi = state.personalInfo;
-  document.getElementById('dispName').textContent = pi.name;
-  document.getElementById('dispScore').textContent = pi.score;
-  document.getElementById('dispSubjects').textContent = pi.subjects;
-  document.getElementById('dispRank').textContent = pi.rank.toLocaleString('zh-CN');
-
   render();
 }
 
-// Also update info card display on render
 const origRender = render;
 render = function() {
   const pi = state.personalInfo;
@@ -972,13 +1032,7 @@ render = function() {
   origRender();
 };
 
-// Start app
-init().catch(e => {
-  console.error('初始化失败:', e);
-  toast('初始化失败，请刷新页面重试', 'error');
-});
-
+init().catch(e => { console.error('初始化失败:', e); toast('初始化失败，请刷新页面重试', 'error'); });
 </script>
-
 </body>
 </html>
